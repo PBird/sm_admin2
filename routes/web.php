@@ -18,6 +18,8 @@ Route::get('adminpanel', function () {
         return view('Admin_panel.pages.index');
         // Matches The "/Admin_panel/index" URL
     });
+Route::get('/deneme/{slug}/{slug2?}', array('as' => 'page.show', 'uses' => 'PageController@show')); // as name of route
+
 
 Route::prefix('adminpanel')->group(function () {
 
@@ -75,6 +77,22 @@ Route::prefix('adminpanel')->group(function () {
             return view('Admin_panel.pages.typography');
             // Matches The "/Admin_panel/index" URL
         });
+     Route::get('allpages', function () {
+            return view('Admin_panel.pages.allPages');
+            // Matches The "/Admin_panel/index" URL
+        })->name('adminpanel.allpages');
+      Route::get('newpage', function () {
+            return view('Admin_panel.pages.newpage');
+            // Matches The "/Admin_panel/index" URL
+        })->name('adminpanel.newpage');
+
+      //page operations
+
+      Route::prefix('adminpanel/page')->group(function () {
+
+            Route::post('create','PageController@store')->name('page.store');
+
+      });
 
 });
 

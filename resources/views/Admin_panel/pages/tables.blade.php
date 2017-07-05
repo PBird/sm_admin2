@@ -563,7 +563,7 @@
                         <!-- /.panel-heading -->
                         <div class="panel-body">
                             <div class="table-responsive">
-                                <table class="table table-striped">
+                                <table class="table table-striped" id="example">
                                     <thead>
                                         <tr>
                                             <th>#</th>
@@ -574,6 +574,60 @@
                                     </thead>
                                     <tbody>
                                         <tr>
+                                            <td>1</td>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>@mdo</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Jacob</td>
+                                            <td>Thornton</td>
+                                            <td>@fat</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>Larry</td>
+                                            <td>the Bird</td>
+                                            <td>@twitter</td>
+                                        </tr>
+                                         <tr>
+                                            <td>1</td>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>@mdo</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Jacob</td>
+                                            <td>Thornton</td>
+                                            <td>@fat</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>Larry</td>
+                                            <td>the Bird</td>
+                                            <td>@twitter</td>
+                                        </tr>
+                                         <tr>
+                                            <td>1</td>
+                                            <td>Mark</td>
+                                            <td>Otto</td>
+                                            <td>@mdo</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Jacob</td>
+                                            <td>Thornton</td>
+                                            <td>@fat</td>
+                                        </tr>
+                                        <tr>
+                                            <td>3</td>
+                                            <td>Larry</td>
+                                            <td>the Bird</td>
+                                            <td>@twitter</td>
+                                        </tr>
+                                         <tr>
                                             <td>1</td>
                                             <td>Mark</td>
                                             <td>Otto</td>
@@ -761,14 +815,17 @@
 <script src={{asset("Admin_Panel/vendor/datatables/js/jquery.dataTables.min.js")}}></script>
 <script src={{asset("Admin_Panel/vendor/datatables-plugins/dataTables.bootstrap.min.js")}}></script>
 <script src={{asset("Admin_Panel/vendor/datatables-responsive/dataTables.responsive.js")}}></script>
+<script type="text/javascript">
+
+$('#example').dataTable( {
+    "paging": false
+} );
+
+</script>
 
 
 <!-- Page-Level Demo Scripts - Tables - Use for reference -->
 <script>
-$(document).ready(function() {
-    $('#dataTables-example').DataTable({
-        responsive: true
-    });
-});
+
 </script>
 @endsection('exscripts')
