@@ -12,13 +12,14 @@
 */
 
 
+Route::get('/','PageController@index');
 
 
 Route::get('adminpanel', function () {
         return view('Admin_panel.pages.index');
         // Matches The "/Admin_panel/index" URL
     });
-Route::get('/deneme/{slug}/{slug2?}', array('as' => 'page.show', 'uses' => 'PageController@show')); // as name of route
+
 
 
 Route::prefix('adminpanel')->group(function () {
@@ -92,12 +93,18 @@ Route::prefix('adminpanel')->group(function () {
 
             Route::post('create','PageController@store')->name('page.store');
 
+            Route::get('/{slug}/{slug2?}', array('as' => 'page.show', 'uses' => 'PageController@show')); // as name of route
+
+      });
+
+      Route::prefix('nav')->group(function () {
+
+            Route::get('index','NavController@index')->name('nav.index');
+            Route::post('create','NavController@store')->name('nav.store');
+            Route::post('{id}/edit','NavController@edit')->name('nav.edit');
+
       });
 
 });
 
-
-Route::get('/', function () {
-    return view('welcome');
-});
 

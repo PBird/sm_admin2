@@ -3,13 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\page;
+use App\navigation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 
 class PageController extends Controller
 {
-
-
 
     /**
      * Display a listing of the resource.
@@ -19,6 +18,14 @@ class PageController extends Controller
     public function index()
     {
         //
+        $pages = page::where('status','=', '1')->get();
+        $navs = navigation::all();
+
+
+       return view('site.index',compact('pages','navs'));
+
+
+
     }
 
     /**
@@ -39,18 +46,22 @@ class PageController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'title' => 'required',
+            'route' => 'required',
+            'status' => 'required',
+
+            ]);
+
         $data = $request->all();
-        $route = page::whereRoute($data['route']);
-        $isAvailable = !(isset( $route));
+        $route = page::whereRoute($data['route'])->get()->first();
+
+        $isAvailable = !(isset($route));
 
         if($isAvailable)
             page::create($data);
         else
-            return "this route has taken";
-
-
-
-
+            return back()->withErrors(['The Route has taken']);
 
     }
 
@@ -62,15 +73,16 @@ class PageController extends Controller
      */
     public function show($slug,$slug2="")
     {
-
+        if(!empty($slug2))
             $route= $slug.'/'.$slug2;
+        $route=$slug;
 
-        $page = page::where([['status','=','1'], ['route','=',$route ]])->first();
+        $page = page::where([['status','=','1'], ['route','=',$route ]])->get();
 
         if(isset($page))
-        return View('Admin_panel.site.index')->with('page',$page);
+            return View('site.index')->with('page',$page);
         else
-          return abort(404);
+            return abort(404);
 
     }
 

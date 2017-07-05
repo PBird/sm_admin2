@@ -29,12 +29,12 @@
 
                             {{csrf_field()}}
                            <div class="form-group">
-                               <label>Page Title</label>
-                                 <input name="title" class="form-control" placeholder="Title">
+                               <label>Page name</label>
+                                 <input name="name" class="form-control" placeholder="Title">
                                <label>Insert Media</label>
                                  <a rel="1" type="button" class="btn btn-outline btn-default newWindow" >Media</a><br>
-                               <label>Route</label>
-                                 <input name="route" class="form-control" placeholder="ROUTE EXAMPLE: /laravel/new">
+                               <label>Route Tag</label>
+                                 <input name="routetag" class="form-control" placeholder="Route Tag  example: #features">
                                <label>Page Content</label>
                                  <textarea name="content" class="form-control" rows="5" fixed></textarea>
                                <button type="submit" class="btn btn-success" > Create </button>
@@ -48,7 +48,10 @@
                                         <input type="radio" name="status" id="optionsPassive" value="0" checked> Passive
                                     </label>
                                 </div>
+
                           </div>
+                          @include('Admin_panel.layouts.errors')
+
 
                       </form>
                   </div>

@@ -249,6 +249,18 @@
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
+                          <li>
+                            <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Menus <span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href={{route('nav.index')}}>Show Menu</a>
+                                </li>
+                                <li>
+                                    <a href={{route('nav.store')}}>Create Menu</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
 
 
 
