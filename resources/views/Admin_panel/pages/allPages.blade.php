@@ -16,22 +16,41 @@
                             <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                                 <thead>
                                     <tr>
-                                        <th>Page Title</th>
-                                        <th>Route</th>
+                                        <th></th>
+                                        <th>name</th>
+                                        <th>content</th>
+                                        <th>Tagged Menu Name</th>
                                         <th>Created</th>
                                         <th>Updated</th>
                                         <th>Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="odd gradeX">
-                                        <td>Trident</td>
-                                        <td>Internet Explorer 4.0</td>
-                                        <td>Win 95+</td>
-                                        <td class="center">4</td>
-                                        <td class="center">X</td>
-                                    </tr>
 
+                                  @foreach($pages as $page)
+                                       <tr class="odd gradeX">
+                                    <td> <label>
+                                       <input type="checkbox" value=" {{$page->id}} ">
+                                        </label></td>
+                                        <td>{{$page->name}}</td>
+                                        <td>{{str_limit($page->content,15) }}</td>
+                                        <td> @if(!empty($page->navigation))
+                                            {{ $page->navigation->name }}
+                                             @endif
+                                         </td>
+
+                                        <td>{{$page->created_at}}</td>
+                                        <td>{{$page->updated_at}}</td>
+                                        <td>
+                                        @if($page->status==1)
+                                        <p class="fa fa-plus"> Active</p>
+                                        @else <p class="fa fa-minus"> Passive </p>
+                                        @endif </td>
+                                          <td> <a type="button" class="btn btn-warning" style="margin-right:8px" href="{{route('page.edit',['id' => $page->id ])}}">Edit</a>
+                                        <a type="button" class="btn btn-danger" href="{{route('page.delete',['id' => $page->id ])}}">Delete</a>  </td>
+
+                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                             <!-- /.table-responsive -->

@@ -241,10 +241,10 @@
                             <a href="#"><i class="fa fa-bar-chart-o fa-fw"></i> Pages<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href={{route('adminpanel.allpages')}}>All Pages</a>
+                                    <a href={{route('page.showall')}}>All Pages</a>
                                 </li>
                                 <li>
-                                    <a href={{route('adminpanel.newpage')}}>Add New</a>
+                                    <a href={{route('page.create')}}>Add New</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
@@ -259,7 +259,7 @@
                                     <a href={{route('nav.store')}}>Create Menu</a>
                                 </li>
                             </ul>
-                            <!-- /.nav-second-level -->
+
                         </li>
 
 

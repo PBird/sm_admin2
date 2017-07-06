@@ -14,9 +14,11 @@ class NavController extends Controller
      */
     public function index()
     {
-        $navs = navigation::all();
 
-        return view('Admin_panel.pages.navs',compact('navs'));
+         $navs = navigation::all();
+
+         return view('Admin_panel.pages.navs',compact('navs'));
+
     }
 
     /**
@@ -26,7 +28,8 @@ class NavController extends Controller
      */
     public function create()
     {
-        //
+
+        return view('Admin_panel.pages.createnav');
     }
 
     /**
@@ -37,7 +40,20 @@ class NavController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,
+            [
+                'name' => 'required|min:2',
+                'tag' => 'required|min:2|unique:navigations'
+
+            ]);
+
+
+        $data = $request->all();
+        navigation::create($data);
+
+       return back()->with('success', ' Menu Button has been created successfully ');
+
+
     }
 
     /**
@@ -46,9 +62,11 @@ class NavController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(navigation $id)
     {
-        //
+
+        return view('Admin_panel.pages.editnav')->with('nav',$id);
+
     }
 
     /**
@@ -57,9 +75,22 @@ class NavController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request,navigation $id)
     {
-        //
+        $this->validate($request,
+            [
+                'name' => 'required|min:2',
+                'tag' => 'required|min:2|unique:navigations'
+
+            ]);
+
+
+        $data = $request->all();
+        $id->update($data);
+
+       return back()->with('success', ' Menu Button has been updated successfully ');
+
+
     }
 
     /**
@@ -71,8 +102,10 @@ class NavController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-    }
+
+
+
+     }
 
     /**
      * Remove the specified resource from storage.
@@ -80,8 +113,11 @@ class NavController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(navigation $id)
     {
-        //
+        $id->delete();
+
+        return back()->with('success', ' Menu Button has been deleted successfully ');
+
     }
 }

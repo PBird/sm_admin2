@@ -28,6 +28,15 @@ class PageController extends Controller
 
     }
 
+     public function showall()
+    {
+        //
+        $pages = page::all();
+
+         return view('Admin_panel.pages.allPages')->with('pages',$pages);
+
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -35,7 +44,8 @@ class PageController extends Controller
      */
     public function create()
     {
-        //
+        $navs = navigation::all();
+        return view('Admin_panel.pages.newpage')->with('navs',$navs);
     }
 
     /**
@@ -46,22 +56,19 @@ class PageController extends Controller
      */
     public function store(Request $request)
     {
+
         $this->validate($request, [
-            'title' => 'required',
-            'route' => 'required',
+            'name' => 'required',
+            'content' => 'required',
             'status' => 'required',
 
             ]);
 
         $data = $request->all();
-        $route = page::whereRoute($data['route'])->get()->first();
 
-        $isAvailable = !(isset($route));
+        page::create($data);
 
-        if($isAvailable)
-            page::create($data);
-        else
-            return back()->withErrors(['The Route has taken']);
+        return back()->with('success', ' Page has been created successfully ');
 
     }
 
@@ -71,18 +78,10 @@ class PageController extends Controller
      * @param  \App\page  $page
      * @return \Illuminate\Http\Response
      */
-    public function show($slug,$slug2="")
+    public function show(page $id)
     {
-        if(!empty($slug2))
-            $route= $slug.'/'.$slug2;
-        $route=$slug;
-
-        $page = page::where([['status','=','1'], ['route','=',$route ]])->get();
-
-        if(isset($page))
-            return View('site.index')->with('page',$page);
-        else
-            return abort(404);
+        $navs=navigation::all();
+        return view('Admin_panel.pages.editpage')->with('page',$id)->with('navs',$navs);
 
     }
 
@@ -92,9 +91,23 @@ class PageController extends Controller
      * @param  \App\page  $page
      * @return \Illuminate\Http\Response
      */
-    public function edit(page $page)
+    public function edit(page $id,Request $request)
     {
-        //
+            $this->validate($request, [
+            'name' => 'required',
+            'content' => 'required',
+            'status' => 'required',
+
+            ]);
+
+            $data = $request->all();
+
+            dd($data);
+
+            $id->update($data);
+
+            return back()->with('success', ' Page has been updated successfully ');
+
     }
 
     /**
@@ -115,8 +128,10 @@ class PageController extends Controller
      * @param  \App\page  $page
      * @return \Illuminate\Http\Response
      */
-    public function destroy(page $page)
+    public function destroy(page $id)
     {
-        //
+        $id->delete();
+        return back()->with('success', ' Page has been deleted successfully ');
+
     }
 }

@@ -37,33 +37,33 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="create">
-                        <form method="post" action=" {{ route('page.store') }} ">
+                        <form method="post" action=" {{ route('page.edit',['id' => $page->id ]) }} ">
 
                             {{csrf_field()}}
                            <div class="form-group">
                                <label>Page name</label>
-                                 <input name="name" class="form-control" placeholder="name">
+                                 <input name="name" class="form-control" placeholder="name" value="{{ $page->name }}">
                                  <label>Page Content</label>
-                                 <textarea name="content" class="form-control" rows="5" fixed></textarea>
+                                 <textarea name="content" class="form-control" rows="5" fixed> {{$page->content}} </textarea>
                                <!-- <label>Insert Media</label>
                                  <a rel="1" type="button" class="btn btn-outline btn-default newWindow" >Media</a><br> -->
                                 <label>Link to Menu</label>
                                <select name="tag_id" class="form-control">
-                                          <option  value="" selected>Select</option>
+                                          <option  value="" @if($page->nav_id=="") selected @endif>Select </option>
                                           @foreach($navs as $nav)
-                                                <option value=" {{$nav->id}} " >{{$nav->name}}</option>
+                                                <option value=" {{$nav->id}} " @if($page->nav_id==$nav->id) selected @endif >{{$nav->name}}</option>
                                            @endforeach
                                 </select>
 
-                               <button type="submit" class="btn btn-success" > Create </button>
+                               <button type="submit" class="btn btn-success" > Update </button>
                                <div class="radio">
                                     <label>
-                                        <input type="radio" name="status" id="optionsActive" value="1" > Active
+                                        <input type="radio" name="status" id="optionsActive" value="1" @if($page->status==1) checked @endif > Active
                                     </label>
                                 </div>
                                 <div class="radio">
                                     <label>
-                                        <input type="radio" name="status" id="optionsPassive" value="0" checked> Passive
+                                        <input type="radio" name="status" id="optionsPassive" value="0" @if($page->status==0) checked @endif> Passive
                                     </label>
                                 </div>
 

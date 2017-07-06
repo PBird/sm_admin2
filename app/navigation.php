@@ -7,7 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class navigation extends Model
 {
     //
+        protected $fillable= [
+            'name',
+            'tag'
 
+        ];
 
     public function page(){
 

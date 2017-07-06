@@ -16,6 +16,7 @@
                             <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
                                 <thead>
                                     <tr>
+                                        <th></th>
                                         <th>Menu Name</th>
                                         <th>Route Tag</th>
                                         <th>Created</th>
@@ -25,16 +26,23 @@
                                 <tbody>
                                 @foreach($navs as $nav)
                                     <tr class="odd gradeX">
-                                        <td> <a href=" {{route('nav.edit',[ 'id' => $nav->id ])}} ">{{$nav->name}}</a> </td>
-                                        <td> <a href=" {{route('nav.edit',[ 'id' => $nav->id ])}} ">{{$nav->tag}}</a> </td>
-                                        <td> <a href=" {{route('nav.edit',[ 'id' => $nav->id ])}} ">{{$nav->created_at}}</a> </td>
-                                        <td class="center"> <a href=" {{route('nav.edit',[ 'id' => $nav->id ])}} ">{{$nav->updated_at}}</a></td>
+                                        <td> <label>
+                                                    <input type="checkbox" value=" {{$nav->id}} ">
+                                        </label></td>
+                                        <td> {{$nav->name}} </td>
+                                        <td> {{$nav->tag}}</td>
+                                        <td> {{$nav->created_at}} </td>
+                                        <td class="center"> {{$nav->updated_at}} </td>
+                                        <td> <a type="button" class="btn btn-warning" style="margin-right:8px" href="{{route('nav.edit',['id' => $nav->id ])}}">Edit</a>
+                                        <a type="button" class="btn btn-danger" href="{{route('nav.delete',['id' => $nav->id ])}}">Delete</a>  </td>
+
                                     </tr>
                                 @endforeach
 
                                 </tbody>
                             </table>
                             <!-- /.table-responsive -->
+                             @include('Admin_panel.layouts.confirm')
 
                         </div>
 

@@ -91,17 +91,23 @@ Route::prefix('adminpanel')->group(function () {
 
       Route::prefix('adminpanel/page')->group(function () {
 
+            Route::get('','PageController@showall')->name('page.showall');
             Route::post('create','PageController@store')->name('page.store');
-
-            Route::get('/{slug}/{slug2?}', array('as' => 'page.show', 'uses' => 'PageController@show')); // as name of route
+            Route::get('create','PageController@create')->name('page.create');
+            Route::get('{id}/edit','PageController@show')->name('page.edit');
+            Route::post('{id}/edit','PageController@edit')->name('page.edit');
+            Route::get('{id}/ delete','PageController@destroy')->name('page.delete');
 
       });
 
       Route::prefix('nav')->group(function () {
 
             Route::get('index','NavController@index')->name('nav.index');
+            Route::get('create','NavController@create')->name('nav.create');
             Route::post('create','NavController@store')->name('nav.store');
+            Route::get('{id}/edit','NavController@show')->name('nav.edit');
             Route::post('{id}/edit','NavController@edit')->name('nav.edit');
+            Route::get('{id}/delete','NavController@destroy')->name('nav.delete');
 
       });
 

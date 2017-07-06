@@ -9,9 +9,15 @@ class page extends Model
     //
 
     protected $fillable = [
-            'title',
+            'name',
             'content',
-            'route',
-            'status'
+            'status',
+            'nav_id'
+
     ];
+
+    public function navigation() {
+
+        return $this->belongsTo('App\navigation','tag_id','id');
+    }
 }
